@@ -1,0 +1,4 @@
+Sku,Name,Description,ShortDescription,Price,Category,Image1,Image2,Image3,Image4
+TST0024,Test Product 1, Just a test product 1,Product 1,10,Test|Products,tprod1a.png,tprod1b.png,tprod2a.png
+TST0021,Test Product 2, Just another test product 2.1,Product 2,22,Test|Products,tprod2a.png
+TST0025,Test Product 3, Just a third test product 3,Product 3,12,Test|Other Products,tprod3a.png,tprod3b.png,tprod1a.png,tprod2a.png

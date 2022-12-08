@@ -1,0 +1,17 @@
+Name: Product Importer
+Version: 1.0
+ShortDescription: enable product importing using csv files.
+Description: enable product importing using csv files.
+Installation: Copy install.php scripts, paste and click sumbit to install.
+Image: csvfile.png
+Image2:
+Price: 0.00
+Verified: true
+Company: IncraShop
+EMail: support@incrashop.nl
+www: incrashop.nl
+profile: this are sample extensions, created by IncraShop itself.
+Category: product extensions
+Read permissions: Catalog
+Write permissions: Catalog: to make a sample product
+Special permissions: 
