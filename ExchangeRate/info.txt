@@ -1,0 +1,17 @@
+Name: ExchangeRate
+Version: 1.0
+ShortDescription: Automatically update the conversion rate of currencies used in the website
+Description: Conversion rate will be filled with live API exechange rate value based on the current currency used.
+Installation: Copy the script in FrontEnd/exchangeRate.php and run in PHP Test Window
+Image: exchangerate.jpg
+Image2:
+Price: 0.00
+Verified: true
+Company: IncraShop
+EMail: support@incrashop.nl
+www: incrashop.nl
+profile: this are sample extensions, created by IncraShop itself.
+Category: product extensions
+Read permissions: 
+Write permissions:
+Special permissions: 
