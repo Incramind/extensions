@@ -1,0 +1,17 @@
+Name: MetalPriceCalculation
+Version: 1.0
+ShortDescription: metal products price is calculated based on the metal prices from API and calculated by its purity and its weight (grams).
+Description: An example of a metal products, Gold, Silver, Platinum and Palladium. The calculation of metal price is based on an api and on the product purity and its weight (grams). Where if the given product is 22KT gold and is 12g, it is calculated as: '22/24*apiMetalPrice/TroyOunceValue*grams'
+Installation: Copies the script to calculate the price of the metal products, and overrides the function Product::GetActualPrice. It creates one sample product "Test Gold Ring", that is ready to use. Also creates custom table 'Metal' which is the data store for Metal Prices from the API
+Image: Test_Gold_Ring.jpg
+Image2:
+Price: 0.00
+Verified: true
+Company: IncraShop
+EMail: support@incrashop.nl
+www: incrashop.nl
+profile: this are sample extensions, created by IncraShop itself.
+Category: product extensions
+Read permissions: Catalog
+Write permissions: Catalog: to make a sample product
+Special permissions: 
