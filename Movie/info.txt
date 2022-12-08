@@ -1,0 +1,17 @@
+Name: Movies
+Version: 1.0
+ShortDescription: Example extension with a movie and actor database, including fron and back-end screens for that
+Description: This will let you rate movies and add new movies from the fron-end. From the back-end you can see and adjust the ratings. It is just a some sample tables, with some sample data. it shows the way you can add custom tables for your own products.
+Installation: copies some front-end and back-end files. It sets the events to access these html files. In the back-end that is admin/movie/list, admin/actor/list admin/MovieCritic/list and related urls. In the front-end it are urls with /movie
+Image: movies.jpg
+Image2:
+Price: 0.00
+Verified: true
+Company: IncraShop
+EMail: support@incrashop.nl
+www: incrashop.nl
+profile: this are sample extensions, created by IncraShop itself.
+Category: sample extensions
+Read permissions: CustomData
+Write permissions: CustomData: to create additional custom (movie related) tables and data
+Special permissions: 
