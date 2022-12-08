@@ -1,0 +1,17 @@
+Name: PricePerM2
+Version: 1.0
+ShortDescription: product price calculation based on length * width (area).
+Description: An example of a product that has two options, width and height. The actual price is calculated as: 'width*height*product price'. Where the width and height is given in cm, but the price is given per m2.
+Installation: Copies the script to calculate the price per m2, and overrides the function incraShop::CalculateProductPriceFromOptions. It creates one sample product "Canvas printing" with those options, that is ready to use. 
+Image: squarem2.png
+Image2:
+Price: 0.00
+Verified: true
+Company: IncraShop
+EMail: support@incrashop.nl
+www: incrashop.nl
+profile: this are sample extensions, created by IncraShop itself.
+Category: product extensions
+Read permissions: Catalog
+Write permissions: Catalog: to make a sample product
+Special permissions: 
