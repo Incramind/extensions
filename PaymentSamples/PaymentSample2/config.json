@@ -1,0 +1,10 @@
+{
+	"Name": "Payment Sample 2",
+	"ShortDescription": "A sample payment implementation that directly approves a payment",
+	"Description": "This is a sample payment method. It can be used to implement any payment provider that is simple, like cash payments. There is also a sample that shows how to implement a payment provider that uses a webhook",
+	"Install": "PaymentSample2_install.php",
+	"UnInstall": "PaymentSample2_uninstall.php",
+	"Price": 0.0,
+	"Images": ["PaymentSample2_Image1.png", "PaymentSample2_Image2.png"],
+	"Author": "IncraMind"
+}
