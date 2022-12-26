@@ -1,0 +1,22 @@
+{
+	"Name": "Payment Sample 3",
+	"ShortDescription": "A sample payment implementation with a webhook",
+	"Description": "This is a sample payment method. It can be used to implement any payment provider. This sample uses a call to a webhook like paypal does. with this information can be transfered.",
+	"Install": "PaymentSample3_install.php",
+	"UnInstall": "PaymentSample3_uninstall.php",
+	"Price": 0.0,
+	"Images": ["PaymentSample3_Image1.jpg", "PaymentSample3_Image2.png"],
+	"Author": "IncraMind"
+    "category": "Payment",
+    "metaDescription": "payment sample processor payment-provider tester",
+    "version": "1.0",
+    "verified": true,
+    "instalation": "follow installation script",
+    "company": "Incramind",
+    "email": "info@incrashop.nl",
+    "www": "www.incrashop.com",
+    "profile": "This is a sample extensions, created by IncraShop itself.",
+    "readPermissions": "Catalog",
+    "writePermissions": "Catalog: to create sample product",
+    "specialPermissions": ""
+}
