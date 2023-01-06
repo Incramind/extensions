@@ -23,6 +23,8 @@ class TestObject
 $myObj = new TestObject;
 $myObj->webhookPage = $webhookPage;  
 $myObj->finishedPage = $finishedPage; 
+$myObj->orderId = $order->Id;
+$myObj->securityCode = $mutation->SecurityCode;
 
 // create the json string from the object
 $myJSON = json_encode($myObj);

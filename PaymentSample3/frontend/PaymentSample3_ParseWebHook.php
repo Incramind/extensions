@@ -5,12 +5,12 @@
   
   The following object are available:
   
-  $pm          (Object PaymentMethod)   The selected payment method.
-  $website     (Object Website)	        The current website
-  $order       (Object Order)           The order that was created for this checkout.
-  $mutation    (Object OrderMutation)   The order mutation that was crated
-  $message     (return string)          A message that can be passed to the program
-  $transaction (Object Transaction)     The created Transaction, the one you crated earlier if any.
+  $pm           (Object PaymentMethod)   The selected payment method.
+  $website      (Object Website)	     The current website
+  $orderId      (integer)                Reference to the order that was created for this checkout.
+  $mutationId   (integer)                Reference to order mutation that was created
+  $message      (string)                 A message that can be passed to the program
+  $securityCode (string)                 The created Transaction, the one you crated earlier if any.
   
   return    nothing or default 				            nothing is changed, next hour it will be checked again
             "PaymentImplementationStatus_Unknown"       nothing is changed, next hour it will be checked again
@@ -28,21 +28,8 @@
 // in our implementation we will alwaus make the procesing payment succeed the first time we have a chance.
 // when implenting a real payment processor this is the time to ask to the server the status of the payment and translate this status to the right return
 
-if ($transaction->status == TransactionStatusType_Success)
-	$_RETURN = PaymentImplementationStatus_Success;
-else if ($transaction->status == TransactionStatusType_Failed)
-	$_RETURN = PaymentImplementationStatus_Failed;
-else if ($transaction->status == TransactionStatusType_Open)
-	$_RETURN = PaymentImplementationStatus_Pending;
-else if ($transaction->status == TransactionStatusType_Refunded)
-	$_RETURN = PaymentImplementationStatus_Refunded;
-else if ($transaction->status == TransactionStatusType_Disputed)
-	$_RETURN = PaymentImplementationStatus_Disputed;
-else
-	$_RETURN = PaymentImplementationStatus_Ignore;
-
 // return ignore, the order is not yet paid directly, but it is done later
-//$_RETURN = PaymentImplementationStatus_Ignore;
+$_RETURN = PaymentImplementationStatus_Ignore;
 // we are all done, do not do the default
 $_HANDLED = true;
 

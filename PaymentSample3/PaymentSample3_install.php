@@ -31,6 +31,9 @@ else
 	SetMvcEvent("PaymentSample3_Show", "PaymentSample3", "Show");
 	SetMvcEvent("PaymentSample3_MakeTransaction", "PaymentSample3", "makeTransaction");
 	SetMvcEvent("PaymentSample3_Actions", "PaymentSample3", "actions");
+	SetMvcEvent("PaymentSample3_ListOrders", "PaymentSample3", "ListOrders");
+	SetMvcEvent("PaymentSample3_OrderDetails", "PaymentSample3", "OrderDetails");
+	SetMvcEvent("PaymentSample3_GetOrderInfo", "PaymentSample3", "GetOrderInfo");
 	
 
     // override the specific functions for our customer behaviour
@@ -40,6 +43,8 @@ else
 	setFunctionOverride("PaymentSample3_UpdateOnProcessing", "PaymentImplementationCustom", "UpdateStatusOnProcessing", $methodFound->Id);
 	setFunctionOverride("PaymentSample3_GetStatusUpdate", "PaymentImplementationCustom", "GetStatusUpdate", $methodFound->Id);
 	setFunctionOverride("PaymentSample3_GetWebhookReturn", "PaymentImplementationCustom", "GetWebhookReturn", $methodFound->Id);
+	setFunctionOverride("PaymentSample3_ParseWebhook", "PaymentImplementationCustom", "ParseWebhook", $methodFound->Id);
+	setFunctionOverride("PaymentSample3_FinalizePayment", "PaymentImplementationCustom", "FinalizePayment", $methodFound->Id);
 }
 
 echo "Sample payment 3 is now installed";
