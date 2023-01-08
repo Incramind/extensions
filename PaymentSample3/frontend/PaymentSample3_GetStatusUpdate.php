@@ -28,6 +28,8 @@
 // in our implementation we will alwaus make the procesing payment succeed the first time we have a chance.
 // when implenting a real payment processor this is the time to ask to the server the status of the payment and translate this status to the right return
 
+echo "Trabnsaction status = $transaction->status";
+
 if ($transaction->status == TransactionStatusType_Success)
 	$_RETURN = PaymentImplementationStatus_Success;
 else if ($transaction->status == TransactionStatusType_Failed)

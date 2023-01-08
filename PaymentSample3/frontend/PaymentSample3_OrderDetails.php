@@ -31,6 +31,7 @@
 	if ($custoemr!=null)
 		$customerId = $customer->Id;
 	$order = $website->GetOrder($orderId);
+	$mutation = null;
 	if ($order==null)
 	{
 		echo "Order not found";
@@ -38,48 +39,69 @@
 	// check if the order belongs to the current user/session. Otherwise you can just edit the number and see someone else his/her orders.
 	else if ($order->sessionId == $session->Id || $order->custoemrId = $customerId)
 	{
-		if ($order->OrgPaymentMethod != "PaymentSample3")
+		$mutations = $order->GetAllMutations();
+		$mutation = $mutations[0];
+		$pm = $website->FindPaymentMethod("code", "Sample3");
+		if ($pm==null || $mutation==null)
 		{
-			echo "Another payment method is selected for your order: $order->OrgPaymentMethod";
+			echo "Payment method not existing?";
 		}
 		else
 		{
-			$status = OrderMutationStatusTypeToString($order->lastStatus);
-			
-			$dateStr = incraDateFormat($order->LastDate, "dd-mmm-yyyy hh:nn");
-			$total = amountAsString($order->TotalPrice, ',', '.', 2);
-			echo "<table>";
-			echo "<tr><td>OrderNumber</td><td>$order->OrderNumber</td></tr>";
-			echo "<tr><td>Date</td><td>$dateStr</td></tr>";
-			echo "<tr><td>Items</td><td>$order->ItemsSummaryText</td></tr>";
-			echo "<tr><td>TotalExTax</td><td>$order->TotalExTax</td></tr>";
-			echo "<tr><td>TotalTax</td><td>$order->TotalTax</td></tr>";
-			echo "<tr><td>TotalCosts</td><td>$order->TotalCosts</td></tr>";
-			echo "<tr><td>TotalDiscounts</td><td>$order->TotalDiscounts</td></tr>";
-			echo "<tr><td>Total</td><td>$total</td></tr>";
-			echo "<tr><td>BillToName</td><td>$order->BillToName</td></tr>";
-			echo "<tr><td>ShipToName</td><td>$order->ShipToName</td></tr>";
-			echo "<tr><td>ShipToAddressLine1</td><td>$order->ShipToAddressLine1</td></tr>";
-			echo "<tr><td>ShipToAddressLine2</td><td>$order->ShipToAddressLine2</td></tr>";
-			echo "<tr><td>Status</td><td><strong>$status</strong></td></tr>";
-			echo "<tr><td>OpenAmount</td><td>$order->OpenAmount</td></tr>";
-			echo "<tr><td>PaidAmount</td><td>$order->PaidAmount</td></tr>";
-			echo "</table>";
-			//if ($order->lastStatus == OrderMutationStatusType_PendingPayment || $order->lastStatus == OrderMutationStatusType_StartPayment || $order->lastStatus == OrderMutationStatusType_PartlyPaid) 
-			//{
-				// buttons to pay, and to cancel
-				echo "<button type=\"button\" onclick=\"successPayment()\" name=\"success\">Pay</button>";
-				echo "<input type=\"text\" id=\"amount\" name=\"amount\" title=\"amount\" class=\"input-text form-control\">";
-				echo "<button type=\"button\" onclick=\"cancelTransaction()\" name=\"cancel\">Fail payment</button>";
-			//}
-			//if ($order->lastStatus == OrderMutationStatusType_PendingPayment || $order->lastStatus == OrderMutationStatusType_StartPayment || $order->lastStatus == OrderMutationStatusType_PartlyPaid) 
-			//{
-				// buttons to refund or charge-back
-				echo "<button type=\"button\" onclick=\"refundPayment()\" name=\"refund\">Refund</button>";
-				echo "<input type=\"text\" id=\"amountRefund\" name=\"amountRefund\" title=\"amount refund\" class=\"input-text form-control\">";
-				echo "<button type=\"button\" onclick=\"chargeBack()\" name=\"cancel\">Charge back</button>";
-			//}
+			if ($mutation->OrgPaymentMethodId != $pm->Id)
+			{
+				echo "Another payment method is selected for your order: $order->OrgPaymentMethod";
 			}
+			else
+			{
+				$status = OrderMutationStatusTypeToString($order->lastStatus);
+				
+				$dateStr = incraDateFormat($order->LastDate, "dd-mmm-yyyy hh:nn");
+				$total = amountAsString($order->TotalPrice, ',', '.', 2);
+				echo "<table>";
+				echo "<tr><td>OrderNumber</td><td>$order->OrderNumber</td></tr>";
+				echo "<tr><td>Date</td><td>$dateStr</td></tr>";
+				echo "<tr><td>Items</td><td>$order->ItemsSummaryText</td></tr>";
+				echo "<tr><td>TotalExTax</td><td>$order->TotalExTax</td></tr>";
+				echo "<tr><td>TotalTax</td><td>$order->TotalTax</td></tr>";
+				echo "<tr><td>TotalCosts</td><td>$order->TotalCosts</td></tr>";
+				echo "<tr><td>TotalDiscounts</td><td>$order->TotalDiscounts</td></tr>";
+				echo "<tr><td>Total</td><td>$total</td></tr>";
+				echo "<tr><td>BillToName</td><td>$order->BillToName</td></tr>";
+				echo "<tr><td>ShipToName</td><td>$order->ShipToName</td></tr>";
+				echo "<tr><td>ShipToAddressLine1</td><td>$order->ShipToAddressLine1</td></tr>";
+				echo "<tr><td>ShipToAddressLine2</td><td>$order->ShipToAddressLine2</td></tr>";
+				echo "<tr><td>Status</td><td><strong>$status</strong></td></tr>";
+				echo "<tr><td>OpenAmount</td><td>$order->OpenAmount</td></tr>";
+				echo "<tr><td>PaidAmount</td><td>$order->PaidAmount</td></tr>";
+				echo "</table>";
+				$transactions = $order->GetAllTransactions();
+				echo "<table>";
+				echo "<tr><th>Transactions:</th><th>Date</th><th>Amount</th><th>Status</th><th>Message</th></tr>";
+				$cnt = 0;
+				foreach ($transactions as $transaction)
+				{
+					$cnt++;
+					$transactionDateStr = incraDateFormat($transaction->UpdatedAt, "dd-mmm-yyyy hh:nn");
+					echo "<tr><td>$cnt</td><td>$transactionDateStr</td><td>$transaction->Amount</td><td>$transaction->StatusText</td><td>$transaction->Message</td></tr>";
+				}
+				echo "</table>";
+				//if ($order->lastStatus == OrderMutationStatusType_PendingPayment || $order->lastStatus == OrderMutationStatusType_StartPayment || $order->lastStatus == OrderMutationStatusType_PartlyPaid) 
+				//{
+					// buttons to pay, and to cancel
+					echo "<button type=\"button\" onclick=\"successPayment()\" name=\"success\">Pay</button>";
+					echo "<input type=\"text\" id=\"amount\" name=\"amount\" title=\"amount\" class=\"input-text form-control\">";
+					echo "<button type=\"button\" onclick=\"cancelTransaction()\" name=\"cancel\">Fail payment</button>";
+				//}
+				//if ($order->lastStatus == OrderMutationStatusType_PendingPayment || $order->lastStatus == OrderMutationStatusType_StartPayment || $order->lastStatus == OrderMutationStatusType_PartlyPaid) 
+				//{
+					// buttons to refund or charge-back
+					echo "<button type=\"button\" onclick=\"refundPayment()\" name=\"refund\">Refund</button>";
+					echo "<input type=\"text\" id=\"amountRefund\" name=\"amountRefund\" title=\"amount refund\" class=\"input-text form-control\">";
+					echo "<button type=\"button\" onclick=\"chargeBack()\" name=\"cancel\">Charge back</button>";
+				//}
+			}
+		}
 	}
 	else
 	{
@@ -94,28 +116,85 @@
 
 <script type="text/javascript">
 
-function cancelTransaction(){
+function callWebhook(){
+	console.log("Calling webhook");
 	var url_update = "url/{show}";
-	console.log("Calling CANCEL");
+	
 	jQuery.ajax({
-		
-$order->Id;		
-$mutation->OrgPaymentMethodId;
-$order->TotalPrice;
-$mutation->SecurityCode;
-$order->BillToName;
-
-			url	:	"/paymentSample3/MakeTransaction/cancel?orderId="+_data_return.orderId+"&paymentMethodId="+_data_return.paymentMethodId+"&actualAmount="+_data_return.total+"&securityCode="+_data_return.securityCode+"&name="+_data_return.customerName,
+			url	:	<?php 
+			$webhookPage = "/CheckOut/Webhook/$order->Id/$mutation->Id/$mutation->SecurityCode";		
+			echo "\"$webhookPage"; 
+			?> ",
 			type:	"POST",
 			data:	"json",
 			success	:	function(responseText){
-							console.log("success")								  
+							console.log("sucess webhook");
+							//window.location.reload();
 						}
 	   });
-	
-	window.location.href = <?php echo "\"$finishedPage\""; ?>
+}
+
+function cancelTransaction()
+{
+	var url_update = "url/{show}";
+	console.log("Calling CANCEL");
+	jQuery.ajax({
+			url	:	"/paymentSample3/UpdateTransaction/cancel?orderId=" + <?php echo "\"$orderId\""; ?> + "&paymentMethodId=" + <?php echo "\"$mutation->OrgPaymentMethodId\""; ?> + "&actualAmount=" + <?php echo "\"$order->TotalPrice\""; ?> + "&securityCode=" + <?php echo "\"$mutation->SecurityCode\""; ?> + "&name=" + <?php echo "\"$order->BillToName\""; ?>,
+			type:	"POST",
+			data:	"json",
+			success	:	function(responseText){
+							console.log("success cancel")								  
+							callWebhook();							
+						}
+	   });
+}
+
+function chargeBack()
+{
+	var url_update = "url/{show}";
+	console.log("Calling CANCEL");
+	jQuery.ajax({
+			url	:	"/paymentSample3/UpdateTransaction/chargeback?orderId=" + <?php echo "\"$orderId\""; ?> + "&paymentMethodId=" + <?php echo "\"$mutation->OrgPaymentMethodId\""; ?> + "&actualAmount=" + <?php echo "\"$order->TotalPrice\""; ?> + "&securityCode=" + <?php echo "\"$mutation->SecurityCode\""; ?> + "&name=" + <?php echo "\"$order->BillToName\""; ?>,
+			type:	"POST",
+			data:	"json",
+			success	:	function(responseText){
+							console.log("success cancel")								  
+							callWebhook();							
+						}
+	   });
+}
+
+function refundPayment()
+{
+	var url_update = "url/{show}";
+	console.log("Calling CANCEL");
+	jQuery.ajax({
+			url	:	"/paymentSample3/UpdateTransaction/refund?orderId=" + <?php echo "\"$orderId\""; ?> + "&paymentMethodId=" + <?php echo "\"$mutation->OrgPaymentMethodId\""; ?> + "&actualAmount=" + <?php echo "\"$order->TotalPrice\""; ?> + "&securityCode=" + <?php echo "\"$mutation->SecurityCode\""; ?> + "&name=" + <?php echo "\"$order->BillToName\""; ?>,
+			type:	"POST",
+			data:	"json",
+			success	:	function(responseText){
+							console.log("success cancel")								  
+							callWebhook();							
+						}
+	   });
+}
+
+function successPayment()
+{
+	var url_update = "url/{show}";
+	console.log("Calling CANCEL");
+	jQuery.ajax({
+			url	:	"/paymentSample3/UpdateTransaction/success?orderId=" + <?php echo "\"$orderId\""; ?> + "&paymentMethodId=" + <?php echo "\"$mutation->OrgPaymentMethodId\""; ?> + "&actualAmount=" + <?php echo "\"$order->TotalPrice\""; ?> + "&securityCode=" + <?php echo "\"$mutation->SecurityCode\""; ?> + "&name=" + <?php echo "\"$order->BillToName\""; ?>,
+			type:	"POST",
+			data:	"json",
+			success	:	function(responseText){
+							console.log("success cancel")								  
+							callWebhook();							
+						}
+	   });
 }
 
 </script>
+
 
 

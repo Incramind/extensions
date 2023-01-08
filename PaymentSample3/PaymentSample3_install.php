@@ -34,6 +34,7 @@ else
 	SetMvcEvent("PaymentSample3_ListOrders", "PaymentSample3", "ListOrders");
 	SetMvcEvent("PaymentSample3_OrderDetails", "PaymentSample3", "OrderDetails");
 	SetMvcEvent("PaymentSample3_GetOrderInfo", "PaymentSample3", "GetOrderInfo");
+	SetMvcEvent("PaymentSample3_UpdateTransaction", "PaymentSample3", "UpdateTransaction");
 	
 
     // override the specific functions for our customer behaviour

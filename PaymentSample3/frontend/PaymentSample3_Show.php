@@ -177,12 +177,14 @@ function callGetOrderInfo(){
 function callWebhook(){
 	console.log("Calling webhook");
 	var url_update = "url/{show}";
+	
 	jQuery.ajax({
 			url	:	<?php echo "\"$webhookPage"; ?> ",
 			type:	"POST",
 			data:	"json",
 			success	:	function(responseText){
 							console.log("sucess webhook");
+							window.location.href = <?php echo "\"$finishedPage\""; ?>
 						}
 	   });
 }
@@ -200,8 +202,6 @@ function cancelTransaction(){
 							callWebhook();							
 						}
 	   });
-	
-	window.location.href = <?php echo "\"$finishedPage\""; ?>
 }
 
 // we create an open Transaction in the ajax call the redirect.
@@ -217,8 +217,6 @@ function processingPayment(){
 							callWebhook();							
 						}
 	   });
-	
-	window.location.href = <?php echo "\"$finishedPage\""; ?>
 }
 
 // There is an ajax call to create an Transaction. 
@@ -239,8 +237,6 @@ function successPayment(){
 							callWebhook();							
 						}
 	   });
-	
-	window.location.href = <?php echo "\"$finishedPage\""; ?>
 }
 
 
