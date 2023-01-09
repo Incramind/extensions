@@ -167,9 +167,10 @@ function chargeBack()
 function refundPayment()
 {
 	var url_update = "url/{show}";
+	var amount = jQuery("#amountRefund").val();
 	console.log("Calling CANCEL");
 	jQuery.ajax({
-			url	:	"/paymentSample3/UpdateTransaction/refund?orderId=" + <?php echo "\"$orderId\""; ?> + "&paymentMethodId=" + <?php echo "\"$mutation->OrgPaymentMethodId\""; ?> + "&actualAmount=" + <?php echo "\"$order->TotalPrice\""; ?> + "&securityCode=" + <?php echo "\"$mutation->SecurityCode\""; ?> + "&name=" + <?php echo "\"$order->BillToName\""; ?>,
+			url	:	"/paymentSample3/UpdateTransaction/refund?enteredAmount="+amount+"&orderId=" + <?php echo "\"$orderId\""; ?> + "&paymentMethodId=" + <?php echo "\"$mutation->OrgPaymentMethodId\""; ?> + "&actualAmount=" + <?php echo "\"$order->TotalPrice\""; ?> + "&securityCode=" + <?php echo "\"$mutation->SecurityCode\""; ?> + "&name=" + <?php echo "\"$order->BillToName\""; ?>,
 			type:	"POST",
 			data:	"json",
 			success	:	function(responseText){
@@ -182,9 +183,10 @@ function refundPayment()
 function successPayment()
 {
 	var url_update = "url/{show}";
+	var amount = jQuery("#amount").val();
 	console.log("Calling CANCEL");
 	jQuery.ajax({
-			url	:	"/paymentSample3/UpdateTransaction/success?orderId=" + <?php echo "\"$orderId\""; ?> + "&paymentMethodId=" + <?php echo "\"$mutation->OrgPaymentMethodId\""; ?> + "&actualAmount=" + <?php echo "\"$order->TotalPrice\""; ?> + "&securityCode=" + <?php echo "\"$mutation->SecurityCode\""; ?> + "&name=" + <?php echo "\"$order->BillToName\""; ?>,
+			url	:	"/paymentSample3/UpdateTransaction/success?enteredAmount="+amount+"&orderId=" + <?php echo "\"$orderId\""; ?> + "&paymentMethodId=" + <?php echo "\"$mutation->OrgPaymentMethodId\""; ?> + "&actualAmount=" + <?php echo "\"$order->TotalPrice\""; ?> + "&securityCode=" + <?php echo "\"$mutation->SecurityCode\""; ?> + "&name=" + <?php echo "\"$order->BillToName\""; ?>,
 			type:	"POST",
 			data:	"json",
 			success	:	function(responseText){
