@@ -22,24 +22,26 @@
 			<div class="main-content">
 				<h1 class="text-danger"> [_Personal Order list]</h1>
 				<div>
-					<table>
-						<tr><th>Number</th><th>Date</th><th>Items</th><th>Total</th><th>Status</th><<th>Show details</th></tr>
-<?php 
-	$customerId = 0;
-	if ($custoemr!=null)
-		$customerId = $customer->Id;
-	$orders = $website->GetAllOrdersForSession($session->Id, $customerId);
-	foreach($orders as $order)
-	{
-		if ($order->OrgPaymentMethod != "PaymentSample3")
-		{
-			$status = OrderMutationStatusTypeToString($order->lastStatus);
-			$dateStr = incraDateFormat($order->LastDate, "dd-mmm-yyyy hh:nn");
-			$total = amountAsString($order->TotalPrice, ',', '.', 2);
-			echo "<tr><td>$order->OrderNumber</td><td>$dateStr</td><td>$order->ItemsSummaryText</td><th>$total</td><td>$status</td><td><a href=\"/paymentSample3/OrderDetails/$order->Id\">link text</a></td></tr>";
-		}
-	}
-?>	
+					<table class="table table-bordered">
+						<thead>
+							<tr><th>Number</th><th>Date</th><th>Items</th><th>Total</th><th>Status</th><th>Show details</th></tr>
+						</thead>
+						<?php 
+							$customerId = 0;
+							if ($custoemr!=null)
+								$customerId = $customer->Id;
+							$orders = $website->GetAllOrdersForSession($session->Id, $customerId);
+							foreach($orders as $order)
+							{
+								if ($order->OrgPaymentMethod != "PaymentSample3")
+								{
+									$status = OrderMutationStatusTypeToString($order->lastStatus);
+									$dateStr = incraDateFormat($order->LastDate, "dd-mmm-yyyy hh:nn");
+									$total = amountAsString($order->TotalPrice, ',', '.', 2);
+									echo "<tr><td>$order->OrderNumber</td><td>$dateStr</td><td>$order->ItemsSummaryText</td><th>$total</td><td>$status</td><td><a href=\"/paymentSample3/OrderDetails/$order->Id\">link text</a></td></tr>";
+								}
+							}
+						?>	
 					</table>
 				</div>
 			</div>
@@ -52,3 +54,33 @@
 </script>
 
 
+
+<!-- <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table> -->
