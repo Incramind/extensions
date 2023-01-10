@@ -21,12 +21,12 @@
 		<div class="container mt-5">
 			<div class="main-content">
 				<h1 class="text-danger"> [_Order details]</h1>
-				<div>
+				<div class="row">
 <?php                 
     $orderId = $_URL["CONTROLLER"];
-	echo "orderId = $orderId";
+	//echo "orderId = $orderId";
     $orderId2 = $controller;
-	echo "orderId2 = $orderId2";
+	//echo "orderId2 = $orderId2";
 	$customerId = 0;
 	if ($custoemr!=null)
 		$customerId = $customer->Id;
@@ -58,7 +58,7 @@
 				
 				$dateStr = incraDateFormat($order->LastDate, "dd-mmm-yyyy hh:nn");
 				$total = amountAsString($order->TotalPrice, ',', '.', 2);
-				echo "<table>";
+				echo "<table class='table table-bordered'>";
 				echo "<tr><td>OrderNumber</td><td>$order->OrderNumber</td></tr>";
 				echo "<tr><td>Date</td><td>$dateStr</td></tr>";
 				echo "<tr><td>Items</td><td>$order->ItemsSummaryText</td></tr>";
@@ -76,18 +76,20 @@
 				echo "<tr><td>PaidAmount</td><td>$order->PaidAmount</td></tr>";
 				echo "</table>";
 				$transactions = $order->GetAllTransactions();
-				echo "<table>";
-				echo "<tr><th>Transactions:</th><th>Date</th><th>Amount</th><th>Status</th><th>Message</th></tr>";
+				echo "<table class='table table-bordered'>";
+				echo "<thead><tr><th>Transactions:</th><th>Date</th><th>Amount</th><th>Status</th><th>Message</th></tr></thead>";
 				$cnt = 0;
 				foreach ($transactions as $transaction)
 				{
 					$cnt++;
 					$transactionDateStr = incraDateFormat($transaction->UpdatedAt, "dd-mmm-yyyy hh:nn");
-					echo "<tr><td>$cnt</td><td>$transactionDateStr</td><td>$transaction->Amount</td><td>$transaction->StatusText</td><td>$transaction->Message</td></tr>";
+					echo "<tr><td class='text-center'>$cnt</td><td class='text-center'>$transactionDateStr</td><td class='text-center'>$transaction->Amount</td><td class='text-center'>$transaction->StatusText</td><td>$transaction->Message</td></tr>";
 				}
 				echo "</table>";
 				//if ($order->lastStatus == OrderMutationStatusType_PendingPayment || $order->lastStatus == OrderMutationStatusType_StartPayment || $order->lastStatus == OrderMutationStatusType_PartlyPaid) 
 				//{
+				
+
 					// buttons to pay, and to cancel
 					echo "<button type=\"button\" onclick=\"successPayment()\" name=\"success\">Pay</button>";
 					echo "<input type=\"text\" id=\"amount\" name=\"amount\" title=\"amount\" class=\"input-text form-control\">";
@@ -100,6 +102,7 @@
 					echo "<input type=\"text\" id=\"amountRefund\" name=\"amountRefund\" title=\"amount refund\" class=\"input-text form-control\">";
 					echo "<button type=\"button\" onclick=\"chargeBack()\" name=\"cancel\">Charge back</button>";
 				//}
+				
 			}
 		}
 	}

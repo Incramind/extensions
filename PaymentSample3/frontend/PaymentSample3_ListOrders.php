@@ -38,7 +38,7 @@
 									$status = OrderMutationStatusTypeToString($order->lastStatus);
 									$dateStr = incraDateFormat($order->LastDate, "dd-mmm-yyyy hh:nn");
 									$total = amountAsString($order->TotalPrice, ',', '.', 2);
-									echo "<tr><td>$order->OrderNumber</td><td>$dateStr</td><td>$order->ItemsSummaryText</td><th>$total</td><td>$status</td><td><a href=\"/paymentSample3/OrderDetails/$order->Id\">link text</a></td></tr>";
+									echo "<tr><td class='text-center'>$order->OrderNumber</td><td class='text-center'>$dateStr</td><td>$order->ItemsSummaryText</td><th>$total</td><td class='text-center'>$status</td><td class='text-center'><a href=\"/paymentSample3/OrderDetails/$order->Id\">link text</a></td></tr>";
 								}
 							}
 						?>	
