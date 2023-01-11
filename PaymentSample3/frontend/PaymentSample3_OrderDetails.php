@@ -88,19 +88,20 @@
 				echo "</table>";
 				//if ($order->lastStatus == OrderMutationStatusType_PendingPayment || $order->lastStatus == OrderMutationStatusType_StartPayment || $order->lastStatus == OrderMutationStatusType_PartlyPaid) 
 				//{
-				
 
+				echo "<div class='col-xs-12 col-sm-12 col-md-4 col-lg-4' style='padding-left:unset;'>";
 					// buttons to pay, and to cancel
-					echo "<button type=\"button\" onclick=\"successPayment()\" name=\"success\">Pay</button>";
 					echo "<input type=\"text\" id=\"amount\" name=\"amount\" title=\"amount\" class=\"input-text form-control\">";
-					echo "<button type=\"button\" onclick=\"cancelTransaction()\" name=\"cancel\">Fail payment</button>";
-				//}
-				//if ($order->lastStatus == OrderMutationStatusType_PendingPayment || $order->lastStatus == OrderMutationStatusType_StartPayment || $order->lastStatus == OrderMutationStatusType_PartlyPaid) 
-				//{
+					echo "<button type=\"button\" onclick=\"successPayment()\" name=\"success\" class='btn btn-success' style='font-weight: bold; width: 10rem; margin: 4px 4px 8px 0px;'>Pay</button>";
+					echo "<button type=\"button\" onclick=\"cancelTransaction()\" name=\"cancel\" class='btn btn-danger' style='font-weight: bold; width: 10rem; margin: 4px 4px 8px 0px;'>Fail payment</button>";
+
 					// buttons to refund or charge-back
-					echo "<button type=\"button\" onclick=\"refundPayment()\" name=\"refund\">Refund</button>";
 					echo "<input type=\"text\" id=\"amountRefund\" name=\"amountRefund\" title=\"amount refund\" class=\"input-text form-control\">";
-					echo "<button type=\"button\" onclick=\"chargeBack()\" name=\"cancel\">Charge back</button>";
+					echo "<button type=\"button\" onclick=\"refundPayment()\" name=\"refund\" class='btn btn-info' style='font-weight: bold; width: 10rem; margin:4px 4px 8px 0px;'>Refund</button>";
+					echo "<button type=\"button\" onclick=\"chargeBack()\" name=\"cancel\" class='btn btn-danger' style='font-weight: bold;width: 10rem; margin:4px 4px 8px 0px;'>Charge back</button>";
+
+				echo "</div>";
+
 				//}
 				
 			}
