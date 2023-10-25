@@ -1,0 +1,22 @@
+{
+	"Name": "Exchange Rate",
+	"ShortDescription": "Automatically update the conversion rate of currencies used in the website",
+	"Description": "Conversion rate will be filled with live API exechange rate value based on the current currency used.",
+	"Install": "ExchangeRate.php",
+	"UnInstall": "",
+	"Price": 0.0,
+	"Images": "exchangerate.jpg",
+	"Author": "IncraMind",
+    "category": "Currency",
+    "metaDescription": "",
+    "version": "1.0",
+    "verified": true,
+    "instalation": "follow installation script",
+    "company": "Incramind",
+    "email": "info@incrashop.nl",
+    "www": "www.incrashop.com",
+    "profile": "This is a sample extensions, created by IncraShop itself.",
+    "readPermissions": "Catalog",
+    "writePermissions": "Catalog: to create sample product",
+    "specialPermissions": ""
+}
