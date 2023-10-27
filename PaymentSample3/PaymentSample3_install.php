@@ -30,7 +30,7 @@ else
     // override two pages that we need to show the selection, and a ajax page to create a transaction on the server	
 	SetMvcEvent("PaymentSample3_Show", "PaymentSample3", "Show");
 	SetMvcEvent("PaymentSample3_MakeTransaction", "PaymentSample3", "makeTransaction");
-	//SetMvcEvent("PaymentSample3_Actions", "PaymentSample3", "actions");
+	SetMvcEvent("PaymentSample3_Actions", "PaymentSample3", "actions");
 	SetMvcEvent("PaymentSample3_ListOrders", "PaymentSample3", "ListOrders");
 	SetMvcEvent("PaymentSample3_OrderDetails", "PaymentSample3", "OrderDetails");
 	SetMvcEvent("PaymentSample3_GetOrderInfo", "PaymentSample3", "GetOrderInfo");

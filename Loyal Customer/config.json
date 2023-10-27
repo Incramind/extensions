@@ -1,0 +1,23 @@
+{
+	"Name": "Loyal Customer",
+	"ShortDescription": "Ths extension changes the customer to a loyal customer when certain criteria are met.",
+	"Description": "The purpose for this extesion is to recorginize loyal customer, and place them into a special customer group. This customer group can then be used to send special newsletter, have special offers and much more.",
+	"Install": "LoyalCustomer_Install.php",
+	"UnInstall": "LoyalCustomer_uninstall.php",
+	"Manual": "LoyalCustomer.html",
+	"Price": 0.0,
+	"Images": ["LoyalCustomer_Image1.jpg"],
+	"Author": "Dennis Zweijtzer",
+    "category": "Customer",
+    "metaDescription": "customergroup change to loyalty programs, loyal customer",
+    "version": "1.0",
+    "verified": true,
+    "instalation": "follow installation script",
+    "company": "Incramind",
+    "email": "info@incrashop.nl",
+    "www": "www.incrashop.com",
+    "profile": "This is a sample extensions, created by IncraShop itself.",
+    "readPermissions": "Catalog",
+    "writePermissions": "Catalog: to create sample product",
+    "specialPermissions": ""
+}
